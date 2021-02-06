@@ -1,0 +1,47 @@
+.todo-form {
+  position: absolute;
+  height: 400px;
+  width: 300px;
+  background-color: beige;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 3px;
+  border: 2px dotted black;
+  display: none;
+}
+
+.todo-form input {
+  margin: 10px;
+  border-radius: 3px;
+}
+
+#title {
+  height: 40px;
+  width: 280px;
+}
+
+#description {
+  height: 200px;
+  width: 280px;
+}
+
+#due-date {}
+
+.todo-form select {
+  height: 25px;
+  width: 100px;
+  border: 2px solid black;
+}
+
+.todo-form button {
+  margin: 10px;
+  height: 40px;
+  width: 280px;
+}
+
+.todo-form.active {
+  display: block;
+}
