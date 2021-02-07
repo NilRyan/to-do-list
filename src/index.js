@@ -22,7 +22,10 @@ if (localStorage.todos === null) {
 // initial render with default category
 renderProjects(projectsData);
 renderHeader(projects.children[0].textContent);
-// renderTodo(todos, projects.children[0].textContent);
+renderTodo(
+  JSON.parse(localStorage.getItem('todos')),
+  projects.children[0].textContent
+);
 
 // add projects
 projectForm.addEventListener('submit', (e) => {
@@ -59,7 +62,7 @@ taskList.addEventListener('click', (e) => {
   e.stopPropagation();
 
   const id = e.target.getAttribute('data-id');
-  detailRender(todos, id);
+  detailRender(JSON.parse(localStorage.getItem('todos')), id);
   todoForm.classList.toggle('active', true);
 });
 
@@ -100,5 +103,8 @@ submit.addEventListener('click', (e) => {
   localStorage.setItem('todos', JSON.stringify(todos));
   renderTodo(JSON.parse(localStorage.getItem('todos')), category);
 });
-// sort by date due
-// sort by heading
+
+// delete todos
+// show specific category on click
+// sort by date due/completed/priority
+// toggle complete status
