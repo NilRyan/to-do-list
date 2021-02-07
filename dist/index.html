@@ -11,15 +11,12 @@
   <div class = "container">
     <div class="side-bar">
       <h1>Do It</h1>
-      <h2>Today</h2>
-      <h2>Weekly</h2>
-      <ul>
-        <li>Project 1</li>
-        <li>Project 2</li>
+      <ul class="projects">
+        <li class = "active">Home</li>
       </ul>
-      <form >
-        <input type="text" required>
-        <button type = "submit">Add Project</button>
+      <form class="add-project" >
+        <input maxlength="30" name = "project" type="text" required>
+        <button name = "submit" type = "submit">Add Project</button>
       </form>
     </div>
 
@@ -34,7 +31,7 @@
       <form>
         <input id = "title" type="text" placeholder="Title" required>
         <input id = "description" type="text" placeholder="Description" required>
-        <input id = "due-date" type="date">
+        <input id = "duedate" type="date"  required>
         <select id = "priority" name="priority">
           <option value="low">Low</option>
           <option value="medium">Medium</option>

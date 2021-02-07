@@ -23,10 +23,33 @@ body {
 .side-bar {
   height: 100vh;
   background-color: #fff1e6;
-  display: grid;
-  grid-auto-rows: 60px;
-  justify-items: center;
+
 }
+
+.side-bar h1 {
+  text-align: center;
+
+}
+
+.side-bar form {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+
+}
+
+.side-bar form>input {
+  background-color: bisque;
+  border-radius: 5px;
+
+}
+
+.side-bar form>button {
+  background-color: bisque;
+  border-radius: 5px;
+
+}
+
 
 .content {
   background-color: #f0efeb;
@@ -39,6 +62,8 @@ body {
   grid-template-columns: 7.2fr 2fr;
   padding-left: 40px;
   font-size: 25px;
+  background-color: #aa9e6f;
+  border-radius: 10px;
 }
 
 .header h2 {
@@ -51,6 +76,7 @@ body {
   border-radius: 3px;
   width: 100px;
   height: 30px;
+  background-color: #e0d7b2;
 }
 
 /* add todo button */
@@ -63,12 +89,38 @@ body {
   font-size: xx-large;
   box-shadow: 1px 1px 1px black;
   margin-left: 50%;
+  cursor: pointer;
 }
 
 .add-todo:hover {
   transform: scale(1.05);
 }
 
+
+/* Projects */
+.projects>li.active {
+  background-color: #aa9e6f;
+  border-radius: 5px;
+}
+
+.projects>li {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+
+}
+
+.projects>li:hover {
+  cursor: pointer;
+
+}
+
+.projects>li button {
+  border-radius: 50%;
+  background-color: rgb(133, 48, 15);
+  outline: none;
+
+}
 
 
 
@@ -87,6 +139,10 @@ ul {
   justify-items: start;
   font-size: 25px;
   align-items: center;
+}
+
+.list-wrap li:hover {
+  cursor: pointer;
 }
 
 .check {
