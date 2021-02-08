@@ -17,6 +17,9 @@ const submit = document.querySelector('#submit-todo');
 const projects = document.querySelector('.projects');
 const projectForm = document.querySelector('.add-project');
 
+if (localStorage.todos === undefined) {
+  localStorage.setItem('todos', '[]');
+}
 // initial render with default category
 renderProjects(JSON.parse(localStorage.getItem('projects') || '[]'));
 const initialRender = () => {
@@ -106,7 +109,7 @@ window.addEventListener('click', (e) => {
 // add todo
 submit.addEventListener('click', (e) => {
   e.preventDefault();
-  const title = todoForm(e.target.nodeName === 'LI').children[0].title.value;
+  const title = todoForm.children[0].title.value;
   const description = todoForm.children[0].description.value;
   const category = document.querySelector('.active').textContent;
   const date =
@@ -121,7 +124,7 @@ submit.addEventListener('click', (e) => {
     date,
     priority
   );
-  e.target.nodeName === 'LI';
+
   const todos = JSON.parse(localStorage.getItem('todos') || '[]');
   console.log(todos);
   todos.push(todo);
