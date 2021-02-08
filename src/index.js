@@ -7,25 +7,26 @@ import createNewtodo from './createNewtodo';
 import renderTodo from './renderTodo';
 import renderProjects from './renderProjects';
 import deleteProject from './deleteProject';
+import deleteTodo from './deleteTodo';
 
 const taskList = document.querySelector('.task-list');
 const todoForm = document.querySelector('.todo-form');
 
 const submit = document.querySelector('#submit-todo');
-const projectsData = JSON.parse(localStorage.getItem('projects') || '[]');
+//
 const projects = document.querySelector('.projects');
 const projectForm = document.querySelector('.add-project');
 
-if (localStorage.todos === null) {
-  localStorage.setItem('todos', '[]');
-}
 // initial render with default category
-renderProjects(projectsData);
-renderHeader(projects.children[0].textContent);
-renderTodo(
-  JSON.parse(localStorage.getItem('todos')),
-  projects.children[0].textContent
-);
+renderProjects(JSON.parse(localStorage.getItem('projects') || '[]'));
+const initialRender = () => {
+  renderHeader(projects.children[0].textContent);
+  renderTodo(
+    JSON.parse(localStorage.getItem('todos') || '[]'),
+    projects.children[0].textContent
+  );
+};
+initialRender();
 
 // add projects
 projectForm.addEventListener('submit', (e) => {
@@ -33,17 +34,27 @@ projectForm.addEventListener('submit', (e) => {
   while (projects.children.length > 1) {
     projects.removeChild(projects.lastChild);
   }
-  projectsData.push(projectForm.elements[0].value);
-  localStorage.setItem('projects', JSON.stringify(projectsData));
-  renderProjects(JSON.parse(localStorage.getItem('projects')) || '[]');
+
+  const projectsData = JSON.parse(localStorage.getItem('projects') || '[]');
+
+  if (
+    projectsData.every((project) => project !== projectForm.elements[0].value)
+  ) {
+    projectsData.push(projectForm.elements[0].value);
+    localStorage.setItem('projects', JSON.stringify(projectsData));
+  }
+
+  renderProjects(JSON.parse(localStorage.getItem('projects')));
 });
 
 // delete projects
 projects.addEventListener('click', (e) => {
   e.stopPropagation();
+  console.log(e.target.textContent);
   if (e.target.type === 'submit') {
     e.target.parentNode.remove();
 
+    // side-bar
     const projectName = e.target.parentNode.textContent;
     localStorage.setItem(
       'projects',
@@ -55,6 +66,21 @@ projects.addEventListener('click', (e) => {
       projects.removeChild(projects.lastChild);
     }
     renderProjects(JSON.parse(localStorage.getItem('projects')));
+
+    // content
+    localStorage.setItem(
+      'todos',
+      JSON.stringify(
+        deleteTodo(
+          JSON.parse(localStorage.getItem('todos')),
+          'category',
+          projectName
+        )
+      )
+    );
+    taskList.innerHTML = '';
+    initialRender();
+    projects.children[0].classList.add('active');
   }
 });
 // render individual detail of todo
@@ -82,7 +108,7 @@ submit.addEventListener('click', (e) => {
   e.preventDefault();
   const title = todoForm.children[0].title.value;
   const description = todoForm.children[0].description.value;
-  const category = projects.children[0].textContent;
+  const category = document.querySelector('.active').textContent;
   const date =
     todoForm.children[0].duedate.value || format(new Date(), 'yyyy-MM-dd');
   const priority = todoForm.children[0].priority.value;
@@ -102,6 +128,28 @@ submit.addEventListener('click', (e) => {
   renderHeader(category);
   localStorage.setItem('todos', JSON.stringify(todos));
   renderTodo(JSON.parse(localStorage.getItem('todos')), category);
+});
+
+// change category
+projects.addEventListener('click', (e) => {
+  e.stopPropagation();
+  console.log(e.target.nodeName);
+  if (
+    e.target.type !== 'submit' &&
+    e.target.nodeName === 'LI' &&
+    e.target.nodeName !== 'UL'
+  ) {
+    taskList.innerHTML = '';
+    renderHeader(e.target.textContent);
+    renderTodo(JSON.parse(localStorage.getItem('todos')), e.target.textContent);
+
+    projects.childNodes.forEach((project) => {
+      if (project.nodeName === 'LI' && project.classList.contains('active')) {
+        project.classList.remove('active');
+      }
+    });
+    e.target.classList.add('active');
+  }
 });
 
 // delete todos
