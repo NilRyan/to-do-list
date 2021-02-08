@@ -19,10 +19,18 @@ const render = (todos, categ, filter = 'category') => {
 
     const date = document.createElement('li');
     date.textContent = format(parseISO(todo.dueDate), 'PP');
+    const deleteButton = document.createElement('button');
+    deleteButton.setAttribute('data-id', todo.id);
+    deleteButton.classList.add('delete-button');
+    deleteButton.classList.add('btn');
+    const icon = document.createElement('i');
+    icon.classList.add('fa', 'fa-trash');
+    deleteButton.appendChild(icon);
 
     listWrap.appendChild(checkbox);
     listWrap.appendChild(listTodo);
     listWrap.appendChild(date);
+    listWrap.append(deleteButton);
 
     list.appendChild(listWrap);
   });

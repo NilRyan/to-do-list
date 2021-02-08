@@ -49,8 +49,6 @@ projectForm.addEventListener('submit', (e) => {
 
 // delete projects
 projects.addEventListener('click', (e) => {
-  e.stopPropagation();
-  console.log(e.target.textContent);
   if (e.target.type === 'submit') {
     e.target.parentNode.remove();
 
@@ -87,9 +85,11 @@ projects.addEventListener('click', (e) => {
 taskList.addEventListener('click', (e) => {
   e.stopPropagation();
 
-  const id = e.target.getAttribute('data-id');
-  detailRender(JSON.parse(localStorage.getItem('todos')), id);
-  todoForm.classList.toggle('active', true);
+  if (e.target.nodeName === 'LI') {
+    const id = e.target.getAttribute('data-id');
+    detailRender(JSON.parse(localStorage.getItem('todos')), id);
+    todoForm.classList.toggle('active', true);
+  }
 });
 
 // hide or show form
@@ -106,7 +106,7 @@ window.addEventListener('click', (e) => {
 // add todo
 submit.addEventListener('click', (e) => {
   e.preventDefault();
-  const title = todoForm.children[0].title.value;
+  const title = todoForm(e.target.nodeName === 'LI').children[0].title.value;
   const description = todoForm.children[0].description.value;
   const category = document.querySelector('.active').textContent;
   const date =
@@ -121,6 +121,7 @@ submit.addEventListener('click', (e) => {
     date,
     priority
   );
+  e.target.nodeName === 'LI';
   const todos = JSON.parse(localStorage.getItem('todos') || '[]');
   console.log(todos);
   todos.push(todo);
@@ -130,10 +131,11 @@ submit.addEventListener('click', (e) => {
   renderTodo(JSON.parse(localStorage.getItem('todos')), category);
 });
 
+// delete todo
+
 // change category
 projects.addEventListener('click', (e) => {
-  e.stopPropagation();
-  console.log(e.target.nodeName);
+  console.log(e.target.textContent);
   if (
     e.target.type !== 'submit' &&
     e.target.nodeName === 'LI' &&

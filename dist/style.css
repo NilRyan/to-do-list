@@ -82,7 +82,6 @@ body {
 /* add todo button */
 .add-todo {
   border-radius: 50%;
-  color: rgb(16, 51, 51);
   height: 50px;
   width: 50px;
   outline: none;
@@ -117,10 +116,18 @@ body {
 
 .projects>li button {
   border-radius: 50%;
-  background-color: rgb(133, 48, 15);
   outline: none;
 
 }
+
+/* icon is ignored on click event */
+.projects>li button>i {
+  pointer-events: none;
+
+}
+
+
+
 
 
 
@@ -135,7 +142,7 @@ ul {
 
 .list-wrap {
   display: grid;
-  grid-template-columns: 0.2fr 7fr 2fr;
+  grid-template-columns: 0.2fr 7fr 2fr 0.2fr;
   justify-items: start;
   font-size: 25px;
   align-items: center;
@@ -143,6 +150,20 @@ ul {
 
 .list-wrap li:hover {
   cursor: pointer;
+}
+
+.delete-button {
+  border-radius: 50%;
+  margin-right: 20px;
+  height: 25px;
+  width: 30px;
+}
+
+.delete-button {
+  border-radius: 50%;
+  margin-right: 20px;
+  height: 25px;
+  width: 30px;
 }
 
 .check {
