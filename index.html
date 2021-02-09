@@ -11,12 +11,12 @@
 <body>
   <div class = "container">
     <div class="side-bar">
-      <h1>Do It</h1>
+      <h1>Things to Do</h1>
       <ul class="projects">
         <li class = "active">Home</li>
       </ul>
       <form class="add-project" >
-        <input maxlength="30" name = "project" type="text" required>
+        <input maxlength="20" name = "project" type="text" required>
         <button name = "submit" type = "submit">Add Project</button>
       </form>
     </div>
@@ -31,14 +31,14 @@
     <div class="todo-form">
       <form>
         <input id = "title" type="text" placeholder="Title" required>
-        <input id = "description" type="text" placeholder="Description" required>
+        <textarea id = "description" type="text" placeholder="Description" required></textarea>
         <input id = "duedate" type="date"  required>
         <select id = "priority" name="priority">
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
-        <button id = 'submit-todo' type = "submit">submit</button>
+        <button id = 'submit-todo' type = "submit">ADD</button>
       </form>
     </div>
   </div>
