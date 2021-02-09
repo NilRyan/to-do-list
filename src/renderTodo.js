@@ -22,7 +22,11 @@ const renderTodo = (todos, categ, filter = 'category') => {
     const listTodo = document.createElement('li');
     listTodo.setAttribute('data-id', todo.id);
     listTodo.textContent = todo.title;
-
+    listTodo.classList.add(todo.priority);
+    if (todo.completed === true) {
+      listTodo.classList.add('completed');
+      checkbox.setAttribute('checked', true);
+    }
     const date = document.createElement('li');
     date.textContent = format(parseISO(todo.dueDate), 'PP');
     const deleteButton = document.createElement('button');

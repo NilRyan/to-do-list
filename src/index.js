@@ -172,7 +172,28 @@ projects.addEventListener('click', (e) => {
   }
 });
 
-// delete todos
-// show specific category on click
-// sort by date due/completed/priority
+// toggle complete status
+document.querySelectorAll('.check').forEach((box) => {
+  box.addEventListener('change', (e) => {
+    if (e.target.checked === true) {
+      const todo = e.target.parentNode.children[1];
+      todo.classList.toggle('completed', true);
+      const todos = JSON.parse(localStorage.getItem('todos'));
+      todos.find(
+        (item) => item.id === todo.getAttribute('data-id')
+      ).completed = true;
+      localStorage.setItem('todos', JSON.stringify(todos));
+    } else {
+      const todo = e.target.parentNode.children[1];
+      todo.classList.toggle('completed', false);
+      const todos = JSON.parse(localStorage.getItem('todos'));
+      todos.find(
+        (item) => item.id === todo.getAttribute('data-id')
+      ).completed = false;
+      localStorage.setItem('todos', JSON.stringify(todos));
+    }
+  });
+});
+
+// sort by date due
 // toggle complete status
