@@ -6,8 +6,6 @@ const renderHeader = (categ) => {
   <h2 id = "header-category">${categ}</h2>
   <select class = "sort" name="sort">
     <option value="due">Date Due</option>
-    <option value="completed">Completed</option>
-    <option value="priority">Priority</option>
   </select>
 </div>`;
   container.appendChild(header);
