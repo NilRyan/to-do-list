@@ -11,7 +11,7 @@ const detailRender = (todos, id) => {
   const todoDisplayed = todos.filter((todo) => todo.id == id);
   title.value = todoDisplayed[0].title;
   description.value = todoDisplayed[0].description;
-  date.value = format(parseISO(todoDisplayed[0].dueDate), 'yyyy-mm-dd');
+  date.value = format(parseISO(todoDisplayed[0].dueDate), 'yyyy-MM-dd');
   priority.value = todoDisplayed[0].priority;
 };
 export default detailRender;

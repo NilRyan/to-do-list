@@ -109,6 +109,7 @@ window.addEventListener('click', (e) => {
 // add todo
 submit.addEventListener('click', (e) => {
   e.preventDefault();
+
   const title = todoForm.children[0].title.value;
   const description = todoForm.children[0].description.value;
   const category = document.querySelector('.active').textContent;
@@ -124,14 +125,15 @@ submit.addEventListener('click', (e) => {
     date,
     priority
   );
-
-  const todos = JSON.parse(localStorage.getItem('todos') || '[]');
-  console.log(todos);
-  todos.push(todo);
-  taskList.innerHTML = '';
-  renderHeader(category);
-  localStorage.setItem('todos', JSON.stringify(todos));
-  renderTodo(JSON.parse(localStorage.getItem('todos')), category);
+  if (title && description) {
+    const todos = JSON.parse(localStorage.getItem('todos') || '[]');
+    console.log(todos);
+    todos.push(todo);
+    taskList.innerHTML = '';
+    renderHeader(category);
+    localStorage.setItem('todos', JSON.stringify(todos));
+    renderTodo(JSON.parse(localStorage.getItem('todos')), category);
+  }
 });
 
 // delete todo
@@ -173,8 +175,8 @@ projects.addEventListener('click', (e) => {
 });
 
 // toggle complete status
-document.querySelectorAll('.check').forEach((box) => {
-  box.addEventListener('change', (e) => {
+taskList.addEventListener('change', (e) => {
+  if (e.target.classList.contains('check')) {
     if (e.target.checked === true) {
       const todo = e.target.parentNode.children[1];
       todo.classList.toggle('completed', true);
@@ -192,7 +194,7 @@ document.querySelectorAll('.check').forEach((box) => {
       ).completed = false;
       localStorage.setItem('todos', JSON.stringify(todos));
     }
-  });
+  }
 });
 
 // sort by date due

@@ -5,7 +5,7 @@ const renderHeader = (categ) => {
   header.innerHTML = `
   <h2 id = "header-category">${categ}</h2>
   <select class = "sort" name="sort">
-    <option value="due">Date Due</option>
+    <option value="due">Due</option>
   </select>
 </div>`;
   container.appendChild(header);
