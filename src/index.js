@@ -135,7 +135,22 @@ submit.addEventListener('click', (e) => {
 });
 
 // delete todo
-
+document.querySelector('.task-list').addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (e.target.classList.contains('delete-button')) {
+    e.target.parentNode.remove();
+    const remainingTodos = deleteTodo(
+      JSON.parse(localStorage.getItem('todos')),
+      'id',
+      e.target.getAttribute('data-id')
+    );
+    const header = document.querySelector('.active').textContent;
+    taskList.innerHTML = '';
+    renderHeader(header);
+    localStorage.setItem('todos', JSON.stringify(remainingTodos));
+    renderTodo(JSON.parse(localStorage.getItem('todos')), header);
+  }
+});
 // change category
 projects.addEventListener('click', (e) => {
   console.log(e.target.textContent);

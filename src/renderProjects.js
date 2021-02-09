@@ -1,10 +1,5 @@
 import { nanoid } from 'nanoid';
 
-function dueDate(a, b) {
-  if (a.dueDate < b.dueDate) return -1;
-  if (a.dueDate > b.dueDate) return 1;
-  return 0;
-}
 const renderProjects = (projects) => {
   const container = document.querySelector('.projects');
 
