@@ -45,6 +45,7 @@ projectForm.addEventListener('submit', (e) => {
   ) {
     projectsData.push(projectForm.elements[0].value);
     localStorage.setItem('projects', JSON.stringify(projectsData));
+    projectForm.reset();
   }
 
   renderProjects(JSON.parse(localStorage.getItem('projects')));
@@ -196,6 +197,3 @@ taskList.addEventListener('change', (e) => {
     }
   }
 });
-
-// sort by date due
-// toggle complete status
