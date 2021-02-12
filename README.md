@@ -1,5 +1,6 @@
 # To Do List Web Application using HTML, CSS, Javascript
 https://nilryan.github.io/to-do-list/
+![To-Do-List Demo](Demo.gif)
 
 ## Learning Outcomes:
   1. Application of Array methods filter, find, map, sort 
